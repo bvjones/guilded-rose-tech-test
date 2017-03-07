@@ -23,6 +23,11 @@ describe GildedRose do
       GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq 18
     end
+    it 'item quality wont become a negative value' do
+      items = [Item.new("Wallet", 0, 0)]
+      GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq 0
+    end
   end
 
 end
