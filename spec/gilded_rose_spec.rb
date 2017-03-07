@@ -8,6 +8,16 @@ describe GildedRose do
       GildedRose.new(items).update_quality()
       expect(items[0].name).to eq "foo"
     end
+    it 'item quality decreases over time' do
+      items = [Item.new("Wallet", 10, 20)]
+      GildedRose.new(items).update_quality()
+        expect(items[0].quality).to eq 19
+    end
+    it 'item sell_in decreases over time' do
+      items = [Item.new("Wallet", 10, 20)]
+      GildedRose.new(items).update_quality()
+        expect(items[0].sell_in).to eq 9
+    end
   end
 
 end
