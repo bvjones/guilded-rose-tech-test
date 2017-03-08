@@ -64,6 +64,10 @@ class GildedRose
     end
   end
 
+  def is_normal_item(item)
+    !is_aged_brie?(item) && !is_backstage_pass?(item) && !is_sulfuras?(item) && !contains_conjured?(item)
+  end
+
   def is_aged_brie?(item)
     item.name == "Aged Brie"
   end
