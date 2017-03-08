@@ -14,12 +14,12 @@ class GildedRose
 
   def update_quality
     @items.each do |item|
-      if item.name.include? "Conjured"
+      if contains_conjured?(item)
         item.quality -= 2
       end
       if !is_aged_brie?(item) and !is_backstage_pass?(item)
         if item.quality > MIN_ITEM_QUALITY
-          if !is_sulfuras?(item) && (!item.name.include? "Conjured")
+          if !is_sulfuras?(item) && !contains_conjured?(item)
             item.quality -= NORMAL_ITEM_DECAY
           end
         end
@@ -42,13 +42,13 @@ class GildedRose
         item.sell_in -= NORMAL_ITEM_DECAY
       end
       if item.sell_in < MIN_ITEM_QUALITY
-        if item.name.include? "Conjured"
+        if contains_conjured?(item)
           item.quality -= 2
         end
         if !is_aged_brie?(item)
           if !is_backstage_pass?(item)
             if item.quality > MIN_ITEM_QUALITY
-              if !is_sulfuras?(item) && (!item.name.include? "Conjured")
+              if !is_sulfuras?(item) && !contains_conjured?(item)
                 item.quality -= NORMAL_ITEM_DECAY
               end
             end
@@ -74,5 +74,9 @@ class GildedRose
 
   def is_sulfuras?(item)
     item.name == "Sulfuras, Hand of Ragnaros"
+  end
+
+  def contains_conjured?(item)
+    item.name.include? "Conjured"
   end
 end
