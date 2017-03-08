@@ -17,7 +17,7 @@ class GildedRose
       if item.name.include? "Conjured"
         item.quality -= 2
       end
-      if !is_aged_brie?(item) and item.name != "Backstage passes to a TAFKAL80ETC concert"
+      if !is_aged_brie?(item) and !is_backstage_pass(item)
         if item.quality > MIN_ITEM_QUALITY
           if item.name != "Sulfuras, Hand of Ragnaros" && (!item.name.include? "Conjured")
             item.quality -= NORMAL_ITEM_DECAY
@@ -26,7 +26,7 @@ class GildedRose
       else
         if item.quality < MAX_ITEM_QUALITY
           item.quality += 1
-          if item.name == "Backstage passes to a TAFKAL80ETC concert"
+          if is_backstage_pass(item)
             if item.sell_in < BSPASS_TEN_DAY_THRESHOLD && item.sell_in < 50
                 item.quality += 1
             end
@@ -46,7 +46,7 @@ class GildedRose
           item.quality -= 2
         end
         if !is_aged_brie?(item)
-          if item.name != "Backstage passes to a TAFKAL80ETC concert"
+          if !is_backstage_pass(item)
             if item.quality > MIN_ITEM_QUALITY
               if item.name != "Sulfuras, Hand of Ragnaros" && (!item.name.include? "Conjured")
                 item.quality -= NORMAL_ITEM_DECAY
@@ -66,5 +66,9 @@ class GildedRose
 
   def is_aged_brie?(item)
     item.name == "Aged Brie"
+  end
+
+  def is_backstage_pass(item)
+    item.name == "Backstage passes to a TAFKAL80ETC concert"
   end
 end
