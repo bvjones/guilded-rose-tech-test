@@ -53,11 +53,11 @@ class GildedRose
               end
             end
           else
-            item.quality -= item.quality
+            decrease_quality(item)
           end
         else
           if item.quality < MAX_ITEM_QUALITY
-            item.quality += 1
+            increase_quality(item)
           end
         end
       end
@@ -78,5 +78,13 @@ class GildedRose
 
   def contains_conjured?(item)
     item.name.include? "Conjured"
+  end
+
+  def decrease_quality(item)
+    item.quality -= item.quality
+  end
+
+  def increase_quality(item)
+    item.quality += item.quality
   end
 end
