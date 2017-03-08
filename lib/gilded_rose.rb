@@ -17,7 +17,7 @@ class GildedRose
       if item.name.include? "Conjured"
         item.quality -= 2
       end
-      if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
+      if !is_aged_brie?(item) and item.name != "Backstage passes to a TAFKAL80ETC concert"
         if item.quality > MIN_ITEM_QUALITY
           if item.name != "Sulfuras, Hand of Ragnaros" && (!item.name.include? "Conjured")
             item.quality -= NORMAL_ITEM_DECAY
@@ -45,7 +45,7 @@ class GildedRose
         if item.name.include? "Conjured"
           item.quality -= 2
         end
-        if item.name != "Aged Brie"
+        if !is_aged_brie?(item)
           if item.name != "Backstage passes to a TAFKAL80ETC concert"
             if item.quality > MIN_ITEM_QUALITY
               if item.name != "Sulfuras, Hand of Ragnaros" && (!item.name.include? "Conjured")
@@ -62,5 +62,9 @@ class GildedRose
         end
       end
     end
+  end
+
+  def is_aged_brie?(item)
+    item.name == "Aged Brie"
   end
 end
