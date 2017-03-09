@@ -65,7 +65,7 @@ class GildedRose
   end
 
   def is_normal_item(item)
-    !is_aged_brie?(item) && !is_backstage_pass?(item) && !is_sulfuras?(item) && !contains_conjured?(item)
+    !is_aged_brie?(item) && !is_backstage_pass?(item) && !is_sulfuras?(item) && contains_conjured?(item)
   end
 
   def is_aged_brie?(item)
@@ -90,5 +90,9 @@ class GildedRose
 
   def increase_quality(item)
     item.quality += item.quality
+  end
+
+  def change_sellin_date(item)
+    item.sell_in -= NORMAL_ITEM_DECAY
   end
 end
